@@ -1,0 +1,17 @@
+on:
+  push:
+
+jobs:
+  first:
+    runs-on: ubuntu-latest
+    steps:
+    - name: fail
+      run: 'false'
+
+  second:
+    needs:
+    - first
+    runs-on: ubuntu-latest
+    steps:
+    - name: pass?
+      run: 'echo I guess?'
