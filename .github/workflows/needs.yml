@@ -25,7 +25,7 @@ jobs:
       if: needs.frontend.result == 'failure' || needs.backend.result == 'failure'
       env:
         frontend: ${{ needs.frontend.result == 'failure' && 'frontend' || '' }}
-        backend: ${{ needs.frontend.result == 'failure' && 'backend' || '' }}
+        backend: ${{ needs.backend.result == 'failure' && 'backend' || '' }}
         and: ${{ (needs.frontend.result == 'failure' && needs.backend.result == 'failure' && ' and ') || '' }}
       run: |
         echo "Failing because the $frontend$and$backend failed"
