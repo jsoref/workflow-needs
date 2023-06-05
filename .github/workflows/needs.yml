@@ -28,5 +28,5 @@ jobs:
         backend: needs.frontend.result == 'failure' && 'backend' || ''
         and: (needs.frontend.result == 'failure' && needs.backend.result == 'failure' && ' and ') || '' 
       run: |
-        echo "Failing because the $frontend$and$backend failed'
+        echo "Failing because the $frontend$and$backend failed"
         exit 1
