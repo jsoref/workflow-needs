@@ -2,16 +2,31 @@ on:
   push:
 
 jobs:
-  first:
+  frontend:
     runs-on: ubuntu-latest
     steps:
     - name: fail
       run: 'false'
 
-  second:
-    needs:
-    - first
+  backend:
     runs-on: ubuntu-latest
     steps:
-    - name: pass?
-      run: 'echo I guess?'
+    - name: fail
+      run: 'false'
+
+  test:
+    runs-on: ubuntu-latest
+    if: (success() || failure())
+    needs:
+      - frontend
+      - backend
+    steps:
+    - name: Fail on Failure
+      if: needs.frontend.result == 'failure' || needs.backend.result == 'failure'
+      env:
+        frontend: needs.frontend.result == 'failure' && 'frontend' || ''
+        backend: needs.frontend.result == 'failure' && 'backend' || ''
+        and: (needs.frontend.result == 'failure' && needs.backend.result == 'failure' && ' and ') || '' 
+      run: |
+        echo "Failing because the $frontend$and$backend failed'
+        exit 1
