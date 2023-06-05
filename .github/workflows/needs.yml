@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: fail
-      run: 'true'
+      run: 'false'
 
   backend:
     runs-on: ubuntu-latest
