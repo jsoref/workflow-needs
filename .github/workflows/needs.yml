@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: fail
-      run: 'false'
+      run: 'true'
 
   test:
     runs-on: ubuntu-latest
