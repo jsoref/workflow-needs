@@ -12,6 +12,7 @@ jobs:
     needs:
     - first
     runs-on: ubuntu-latest
+    if: needs.first.result != 'cancelled'
     steps:
     - name: pass?
       run: 'echo I guess?'
